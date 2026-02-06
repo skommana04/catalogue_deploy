@@ -3,7 +3,7 @@ pipeline {
         node 'slave1'
     }
     stages{
-        stage('Deploy')
+        stage('Deploy'){
             steps{
                 script{
                     sh """
@@ -11,5 +11,7 @@ pipeline {
                     """
                 }
             }
-    }    
-}
+        }
+    }
+}                    
+
