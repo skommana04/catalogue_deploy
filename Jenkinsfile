@@ -21,25 +21,23 @@ pipeline {
                 }
             }
         }
-        // stage('Deploy'){
-        //     steps{
-        //         script{
-        //             withAWS(credentials: 'aws-creds', region: 'us-east-1') {
-        //                 sh """
-        //                     aws eks update-kubeconfig --name ${PROJECT} --region ${REGION}       
-        //                     echo "Deploy"
+        stage('Deploy'){
+            steps{
+                script{
+                    withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                        sh """
+                            aws eks update-kubeconfig --name ${PROJECT} --region ${REGION}       
+                            echo "Deploy"
+                            kubectl get nodes
+                            
+                            helm upgrade --install catalogue . -f values.yaml --set imageVersion=${params.image_tag}
+                        """
+                        //sed -i "s/imageVersion: */imageVersion: ${params.image_tag}/g" values.yaml
+                    }
 
-        //                     kubectly apply -f manifest.yaml
-        //                     helm install releasename chartname
-        //                     helm upgrade --install catalogue catalogue 
-
-
-        //                 """
-        //             }
-
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
     }
 }                    
 
