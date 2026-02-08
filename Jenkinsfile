@@ -8,7 +8,7 @@ pipeline {
     }
     parameters{
         string(name: 'image_tag')
-        string(name: 'deploy_to', choices: ['dev', 'test', 'prod'], description: 'Environment')
+        choice(name: 'deploy_to', choices: ['dev', 'test', 'prod'], description: 'Environment')
     }
     stages{
         stage('Print Parmateres'){
