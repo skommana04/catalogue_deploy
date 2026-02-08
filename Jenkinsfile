@@ -6,7 +6,7 @@ pipeline {
         REGION='us-east-1'
         PROJECT='roboshop'
     }
-    parameters: {
+    parameters{
         string(name: 'image_tag')
         string(name: 'deploy_to', choices: ['dev', 'test', 'prod'], description: 'Environment')
     }
