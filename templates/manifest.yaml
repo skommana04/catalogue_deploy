@@ -5,7 +5,7 @@ metadata:
   namespace: roboshop
 data:
   MONGO: "true"
-  MONGO_URL: { { .Values.configmap.mongoURL } }
+  MONGO_URL: {{ .Values.configmap.mongoURL }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -68,5 +68,5 @@ spec:
     tier: backend
   ports:
     - protocol: TCP
-      port: { { .Values.service.servicePort } } # service port
+      port: {{ .Values.service.servicePort }} # service port
       targetPort: 8080 # container port
